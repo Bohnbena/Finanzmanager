@@ -3,28 +3,28 @@ package org.example;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Einahmen {
+public class Ausgaben {
     private String Name;
     private double Betrag;
     private boolean Angekommen;
     Scanner input = new Scanner(System.in);
 
-    ArrayList<String> einahmenListe = new ArrayList<String>();
+    ArrayList<String> ausgabenListe = new ArrayList<String>();
 
     public ArrayList<String> getEinahmenListe() {
-        return einahmenListe;
+        return ausgabenListe;
     }
 
-    public void setEinahmenListe(ArrayList<String> einahmenListe) {
-        this.einahmenListe = einahmenListe;
+    public void setEinahmenListe(ArrayList<String> ausgabenListe) {
+        this.ausgabenListe = ausgabenListe;
     }
 
     // Parameterloser Konstruktor
-    public Einahmen() {
+    public Ausgaben() {
 
     }
 
-    public Einahmen(String Name,double Betrag,boolean Angekommen)
+    public Ausgaben(String Name,double Betrag,boolean Angekommen)
     {
         this.Name = Name;
         this.Betrag = Betrag;
@@ -35,29 +35,25 @@ public class Einahmen {
         return String.format("%-20s - %.2f€ - %-10s", Name, Betrag,Angekommen); // Name linksbündig und Betrag rechtsbündig
     }
 
-    public void setEinahmenListeIndex(String object) {
-      this.einahmenListe.add(object);
-    }
-
-    public Einahmen einahmeabfrage()
+    public Ausgaben ausgabenAbfrage()
     {
-        Einahmen einahmen = new Einahmen();
+        Ausgaben ausgaben = new Ausgaben();
         //Schreiben denn namen der fixkoste
-       System.out.println("Namen eingeben:");
-       einahmen.setName(input.nextLine());
+        System.out.println("Namen eingeben:");
+        ausgaben.setName(input.nextLine());
 
-       System.out.println("Betrag");
-       String temp = input.nextLine();
-       einahmen.setBetrag(Integer.parseInt(temp));
-       //Default immer false
-       einahmen.setAngekommen(false);
-       return einahmen;
+        System.out.println("Betrag");
+        String temp = input.nextLine();
+        ausgaben.setBetrag(Integer.parseInt(temp));
+        //Default immer false
+        ausgaben.setAngekommen(false);
+        return ausgaben;
     }
 
-    public void bearbeiteliste(Einahmen einahmen) {
+    public void bearbeiteliste(Ausgaben ausgaben) {
         // schaune erst mal ob die liste leer ist
-        einahmenListe = einahmen.getEinahmenListe();
-        if (einahmenListe.isEmpty())
+        ausgabenListe = ausgaben.getEinahmenListe();
+        if (ausgabenListe.isEmpty())
         {
             System.out.println("Liste ist leer,Nix zu Bearbeiten");
         } else
@@ -67,26 +63,26 @@ public class Einahmen {
             String temp = input.nextLine();
             int index = Integer.parseInt(temp);
 
-            einahmen = einahmen.einahmeabfrage();
-            einahmenListe.set(index,einahmen.toString());
+            ausgaben = ausgaben.ausgabenAbfrage();
+            ausgabenListe.set(index,ausgaben.toString());
         }
     }
 
-    public void setzeNeueEinahme(int flag,Einahmen einahmen)
+    public void setzeNeueEinahme(int flag,Ausgaben ausgaben)
     {
-        einahmenListe = einahmen.getEinahmenListe();
+        ausgabenListe = ausgaben.getEinahmenListe();
         //  Hinzufügen
         if (flag == 1)
         {
-           einahmen = einahmen.einahmeabfrage();
-           einahmenListe.add(new Einahmen(einahmen.getName(), einahmen.getBetrag(),einahmen.isAngekommen()).toString());
+            ausgaben = ausgaben.ausgabenAbfrage();
+            ausgabenListe.add(new Einahmen(ausgaben.getName(), ausgaben.getBetrag(),ausgaben.isAngekommen()).toString());
         }
         //Bearbeiten
         else if(flag == 2)
         {
-            einahmen.bearbeiteliste(einahmen);
+            ausgaben.bearbeiteliste(ausgaben);
         }
-        einahmen.setEinahmenListe(einahmenListe);
+        ausgaben.setEinahmenListe(ausgabenListe);
     }
 
     public boolean isAngekommen() {
@@ -113,4 +109,3 @@ public class Einahmen {
         Name = name;
     }
 }
-

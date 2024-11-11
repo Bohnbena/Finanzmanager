@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class MainMenu {
     private Einahmen einahmen = new Einahmen();
+    private Ausgaben ausgaben = new Ausgaben();
+    Scanner input = new Scanner(System.in);
 
     public void enty() {
         MainMenu main = new MainMenu();
@@ -40,9 +42,10 @@ public class MainMenu {
             String userInput = input.nextLine();
             switch (userInput.toUpperCase()) {
                 case "E":
-                    mainmenu.entryEinahme();
+                    einahmeausgabefenster("Einahmen");
                     break;
                 case "A":
+                    einahmeausgabefenster("Ausgaben");
                     break;
                 case "S":
                     break;
@@ -54,34 +57,6 @@ public class MainMenu {
 
     public void entryEinahme()
     {
-
-        Scanner input = new Scanner(System.in);
-        while (true) {
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
-            ArrayList<String> einahmenList = einahmen.getEinahmenListe();
-            System.out.println("Einahmen:");
-            for(int i=0; i < einahmenList.size()  ;i++)
-            {
-              System.out.println( i +"." + einahmenList.get(i));
-            }
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("Was möchtest du mit deinen Einahmen tun?");
-            System.out.println("[H] - Hinzufügen");
-            System.out.println("[B] - Bearbeiten");
-            // In der Statistik sehen wir alles ein
-            System.out.println("[S] - Statistik");
-            System.out.println("[X] - Exit");
             //Userinput und machen es Groß
             String userInput = input.nextLine();
             switch (userInput.toUpperCase()) {
@@ -96,9 +71,65 @@ public class MainMenu {
                 case "X":
                     break;
             }
+    }
+
+    public void entryAusgabe()
+    {
+        //Userinput und machen es Groß
+        String userInput = input.nextLine();
+        switch (userInput.toUpperCase()) {
+            case "H":
+                ausgaben.setzeNeueEinahme(1,ausgaben);
+                break;
+            case "B":
+                ausgaben.setzeNeueEinahme(2,ausgaben);
+                break;
+            case "S":
+                break;
+            case "X":
+                break;
         }
     }
 
-
-
+    public void einahmeausgabefenster(String wahl) {
+        while (true) {
+            System.out.println("  ");
+            System.out.println("  ");
+            System.out.println("  ");
+            System.out.println("  ");
+            System.out.println("  ");
+            System.out.println("  ");
+            System.out.println("  ");
+            System.out.println("  ");
+            System.out.println("  ");
+            if (wahl.equals("Einahmen")) {
+                ArrayList<String> einahmenList = einahmen.getEinahmenListe();
+                System.out.println("Einahmen:");
+                for (int i = 0; i < einahmenList.size(); i++) {
+                    System.out.println(i + "." + einahmenList.get(i));
+                }
+            } else {
+                ArrayList<String> ausgabenListe = ausgaben.getEinahmenListe();
+                System.out.println("Ausgaben:");
+                for (int i = 0; i < ausgabenListe.size(); i++) {
+                    System.out.println(i + "." + ausgabenListe.get(i));
+                }
+            }
+            System.out.println("  ");
+            System.out.println("  ");
+            System.out.println("  ");
+            System.out.println("  ");
+            System.out.println("Was möchtest du tun?");
+            System.out.println("[H] - Hinzufügen");
+            System.out.println("[B] - Bearbeiten");
+            // In der Statistik sehen wir alles ein
+            System.out.println("[S] - Statistik");
+            System.out.println("[X] - Exit");
+            if (wahl.equals("Einahmen")) {
+                entryEinahme();
+            } else {
+                entryAusgabe();
+            }
+        }
+    }
 }
