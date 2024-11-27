@@ -13,7 +13,6 @@ public class MainMenu {
 
     public void enty() {
         MainMenu main = new MainMenu();
-        main.asciart();
         main.start();
     }
 
@@ -23,15 +22,23 @@ public class MainMenu {
         System.out.println("\\ \\  __\\ \\ \\ \\  \\ \\ \\-.  \\  \\ \\  __ \\  \\ \\ \\-.  \\  \\/_/  /__  \\ \\ \\-./\\ \\  \\ \\  __ \\  \\ \\ \\-.  \\  \\ \\  __ \\  \\ \\ \\__ \\  \\ \\  __\\   \\ \\  __<   ");
         System.out.println(" \\ \\_\\    \\ \\_\\  \\ \\_\\\"\\_\\  \\ \\_\\ \\_\\  \\ \\_\\\"\\_\\   /\\_____\\  \\ \\_\\ \\ \\_\\  \\ \\_\\ \\_\\  \\ \\_\\\"\\_\\  \\ \\_\\ \\_\\  \\ \\_____\\  \\ \\_____\\  \\ \\_\\ \\_\\ ");
         System.out.println("  \\/_/     \\/_/   \\/_/ \\/_/   \\/_/\\/_/   \\/_/ \\/_/   \\/_____/   \\/_/  \\/_/   \\/_/\\/_/   \\/_/ \\/_/   \\/_/\\/_/   \\/_____/   \\/_____/   \\/_/ /_/ ");
-        System.out.println("  ");
-        System.out.println("  ");
-        System.out.println("  ");
+        space(6);
+    }
+
+    public void space(int amount)
+    {
+        for(int i = 0;i < amount;i++)
+        {
+          System.out.println("  ");
+        }
     }
 
     public void start() {
         MainMenu mainmenu = new MainMenu();
         Scanner input = new Scanner(System.in);
         while (true) {
+
+            asciart();
             System.out.println("Wähle deine Option");
             // In Einahmen und Ausgaben Können wir die einahmen/ausgaben defenieren & kosten
             // Was noch wichtig wäre ist was alles von denn einahmen gekommen ist
@@ -49,7 +56,7 @@ public class MainMenu {
                     einahmeausgabefenster("Einahmen");
                     break;
                 case "A":
-                    ausgaben = (Ausgaben) jsonJackson.listtoobject("Ausgaben");
+                    ausgaben = (Ausgaben) jsonJackson.listtoobject("Ausgabe");
                     einahmeausgabefenster("Ausgaben");
                     break;
                 case "S":
@@ -60,8 +67,9 @@ public class MainMenu {
         }
     }
 
-    public void entryEinahme()
+    public int entryEinahme()
     {
+            int flagbreak = 0;
             //Userinput und machen es Groß
             String userInput = input.nextLine();
             switch (userInput.toUpperCase()) {
@@ -75,13 +83,16 @@ public class MainMenu {
                     break;
                 case "X":
                     jsonJackson.objectojson(einahmen.getEinahmenListe(),"Einahme");
+                    flagbreak = 1;
                     break;
             }
            jsonJackson.objectojson(einahmen.getEinahmenListe(),"Einahme");
+            return flagbreak;
     }
 
-    public void entryAusgabe()
+    public int entryAusgabe()
     {
+        int flagbreak = 0;
         //Userinput und machen es Groß
         String userInput = input.nextLine();
         switch (userInput.toUpperCase()) {
@@ -96,22 +107,16 @@ public class MainMenu {
             case "X":
                 //wenn wir ein exit machen speichern wir das object in einem json
                 jsonJackson.objectojson(ausgaben.getEinahmenListe(),"Ausgabe");
+                flagbreak = 1;
                 break;
         }
         jsonJackson.objectojson(ausgaben.getEinahmenListe(),"Ausgabe");
+        return flagbreak;
     }
 
     public void einahmeausgabefenster(String wahl) {
         while (true) {
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
+            space(20);
             if (wahl.equals("Einahmen")) {
                 ArrayList<String> einahmenList = einahmen.getEinahmenListe();
                 System.out.println("Einahmen:");
@@ -125,20 +130,29 @@ public class MainMenu {
                     System.out.println(i + "." + ausgabenListe.get(i));
                 }
             }
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
-            System.out.println("  ");
+            space(10);
             System.out.println("Was möchtest du tun?");
             System.out.println("[H] - Hinzufügen");
             System.out.println("[B] - Bearbeiten");
             // In der Statistik sehen wir alles ein
             System.out.println("[S] - Statistik");
             System.out.println("[X] - Exit");
+
+            //Es fehlt jetzt eine ausgangs kondition
+            //wenn wir exit machen geben wir einen flag mit damit wir wissen
+            //ob wir ein break machen müssen oder nicht
+            int flagbreak = 0;
+
             if (wahl.equals("Einahmen")) {
-                entryEinahme();
+                flagbreak = entryEinahme();
             } else {
-                entryAusgabe();
+                flagbreak = entryAusgabe();
+            }
+
+            if(flagbreak == 1)
+            {
+                space(20);
+                break;
             }
         }
     }

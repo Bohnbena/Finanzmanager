@@ -25,7 +25,6 @@ public class JsonJackson {
 
        try {
            objectMapper.writeValue(file,list);
-           System.out.println("Saving file to: " + file.getAbsolutePath());
        } catch (IOException e) {
            throw new RuntimeException(e);
        }
@@ -55,7 +54,7 @@ public class JsonJackson {
            pfadname = "Einahme";
        }
        else{
-           pfadname = "Ausgaben";
+           pfadname = "Ausgabe";
        }
 
        File file = new File(pfadname + ".json");

@@ -8,9 +8,7 @@ public class Ausgaben {
     private double Betrag;
     private boolean Angekommen;
     Scanner input = new Scanner(System.in);
-
     JsonJackson json = new JsonJackson();
-
     ArrayList<String> ausgabenListe = new ArrayList<String>();
 
     public ArrayList<String> getEinahmenListe() {

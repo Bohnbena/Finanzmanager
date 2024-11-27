@@ -9,7 +9,6 @@ public class Einahmen {
     private boolean Angekommen;
     Scanner input = new Scanner(System.in);
     JsonJackson json = new JsonJackson();
-
     ArrayList<String> einahmenListe = new ArrayList<String>();
 
     public ArrayList<String> getEinahmenListe() {
