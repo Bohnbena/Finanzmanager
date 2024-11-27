@@ -8,6 +8,7 @@ public class Einahmen {
     private double Betrag;
     private boolean Angekommen;
     Scanner input = new Scanner(System.in);
+    JsonJackson json = new JsonJackson();
 
     ArrayList<String> einahmenListe = new ArrayList<String>();
 
@@ -69,6 +70,7 @@ public class Einahmen {
 
             einahmen = einahmen.einahmeabfrage();
             einahmenListe.set(index,einahmen.toString());
+            json.objectojson(einahmenListe,"Einahme");
         }
     }
 
@@ -87,6 +89,7 @@ public class Einahmen {
             einahmen.bearbeiteliste(einahmen);
         }
         einahmen.setEinahmenListe(einahmenListe);
+        json.objectojson(einahmenListe,"Einahme");
     }
 
     public boolean isAngekommen() {

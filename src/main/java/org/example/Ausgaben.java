@@ -9,6 +9,8 @@ public class Ausgaben {
     private boolean Angekommen;
     Scanner input = new Scanner(System.in);
 
+    JsonJackson json = new JsonJackson();
+
     ArrayList<String> ausgabenListe = new ArrayList<String>();
 
     public ArrayList<String> getEinahmenListe() {
@@ -65,6 +67,7 @@ public class Ausgaben {
 
             ausgaben = ausgaben.ausgabenAbfrage();
             ausgabenListe.set(index,ausgaben.toString());
+            json.objectojson(ausgabenListe,"Ausgabe");
         }
     }
 
@@ -83,6 +86,7 @@ public class Ausgaben {
             ausgaben.bearbeiteliste(ausgaben);
         }
         ausgaben.setEinahmenListe(ausgabenListe);
+        json.objectojson(ausgabenListe,"Ausgabe");
     }
 
     public boolean isAngekommen() {

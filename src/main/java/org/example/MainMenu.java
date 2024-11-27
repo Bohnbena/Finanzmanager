@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainMenu {
+
     private Einahmen einahmen = new Einahmen();
     private Ausgaben ausgaben = new Ausgaben();
+
     Scanner input = new Scanner(System.in);
+    JsonJackson jsonJackson = new JsonJackson();
 
     public void enty() {
         MainMenu main = new MainMenu();
@@ -42,9 +45,11 @@ public class MainMenu {
             String userInput = input.nextLine();
             switch (userInput.toUpperCase()) {
                 case "E":
+                    einahmen = (Einahmen) jsonJackson.listtoobject("Einahme");
                     einahmeausgabefenster("Einahmen");
                     break;
                 case "A":
+                    ausgaben = (Ausgaben) jsonJackson.listtoobject("Ausgaben");
                     einahmeausgabefenster("Ausgaben");
                     break;
                 case "S":
@@ -69,8 +74,10 @@ public class MainMenu {
                 case "S":
                     break;
                 case "X":
+                    jsonJackson.objectojson(einahmen.getEinahmenListe(),"Einahme");
                     break;
             }
+           jsonJackson.objectojson(einahmen.getEinahmenListe(),"Einahme");
     }
 
     public void entryAusgabe()
@@ -87,8 +94,11 @@ public class MainMenu {
             case "S":
                 break;
             case "X":
+                //wenn wir ein exit machen speichern wir das object in einem json
+                jsonJackson.objectojson(ausgaben.getEinahmenListe(),"Ausgabe");
                 break;
         }
+        jsonJackson.objectojson(ausgaben.getEinahmenListe(),"Ausgabe");
     }
 
     public void einahmeausgabefenster(String wahl) {
